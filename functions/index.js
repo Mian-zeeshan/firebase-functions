@@ -83,11 +83,15 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                     const goodRoutine = charge_data.DailyRoutine;
                                     const medication = charge_data.Medication;
 
+
+       //** routine push notification here  */
+
                                     if (goodRoutine) {
                                         Object.keys(goodRoutine).forEach((key) => {
                                             if (goodRoutine[key].allow_notifications && goodRoutine[key].key && goodRoutine[key].routines) {
                                                 for (let r = 0; r < goodRoutine[key].routines.length; r++) {
                                                     let goodRoutineName = goodRoutine[key].routines[r].name;
+                                                    let routineName = goodRoutine[key].name;
                                                     let content = 'Your timer for "' + goodRoutineName + '" has started. Enjoy your time!';
                                                     // let content = "You timer for " + goodRoutine[key].routines[r].name + " has started. Enjoy your time!";
                                                     if (goodRoutine[key].routines[r].from_time && goodRoutine[key].routines[r].from_date) {
@@ -139,7 +143,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                                 },
                                                                                 token: token,
                                                                                 data: {
-                                                                                    notificationId: "dailyroutine", // Include a unique identifier in the data payload
+                                                                                    notificationId: "dailyroutine",
+                                                                                    val:routineName // Include a unique identifier in the data payload
                                                                                 },
                                                                                 apns: {
                                                                                     payload: {
@@ -177,7 +182,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                             },
                                                                             token: token,
                                                                             data: {
-                                                                                notificationId: "dailyroutine", // Include a unique identifier in the data payload
+                                                                                notificationId: "dailyroutine",
+                                                                                val:routineName // Include a unique identifier in the data payload
                                                                             },
                                                                             apns: {
                                                                                 payload: {
@@ -225,7 +231,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                                 },
                                                                                 token: token,
                                                                                 data: {
-                                                                                    notificationId: "dailyroutine", // Include a unique identifier in the data payload
+                                                                                    notificationId: "dailyroutine",
+                                                                                    val:routineName // Include a unique identifier in the data payload
                                                                                 },
                                                                                 apns: {
                                                                                     payload: {
@@ -261,7 +268,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                             },
                                                                             token: token,
                                                                             data: {
-                                                                                notificationId: "dailyroutine", // Include a unique identifier in the data payload
+                                                                                notificationId: "dailyroutine",
+                                                                                val:routineName // Include a unique identifier in the data payload
                                                                             },
                                                                             apns: {
                                                                                 payload: {
@@ -291,12 +299,13 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                             }
                                         })
                                     }
-
+ //** medication push notification here */
                                     if (medication) {
                                         Object.keys(medication).forEach((key) => {
                                             if (medication[key].allow_notifications && medication[key].key && medication[key].routines) {
                                                 for (let r = 0; r < medication[key].routines.length; r++) {
                                                     let medicationName = medication[key].routines[r].name;
+                                                    let medName = medication[key].name;
                                                     let content = 'It\'s time to take your medication: "' + medicationName + '". Please take it now.';
                                                     // let content = "It's time to take your medication: "+ '${medication[key].routines[r].name}' +" Please take it now.";
                                                     if (medication[key].routines[r].from_time && medication[key].routines[r].from_date) {
@@ -347,7 +356,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                                 },
                                                                                 token: token,
                                                                                 data: {
-                                                                                    notificationId: "medication", // Include a unique identifier in the data payload
+                                                                                    notificationId: "medication",
+                                                                                    val:medName // Include a unique identifier in the data payload
                                                                                 },
                                                                                 apns: {
                                                                                     payload: {
@@ -382,7 +392,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                             },
                                                                             token: token,
                                                                             data: {
-                                                                                notificationId: "medication", // Include a unique identifier in the data payload
+                                                                                notificationId: "medication",
+                                                                                val:medName // Include a unique identifier in the data payload
                                                                             },
                                                                             apns: {
                                                                                 payload: {
@@ -425,7 +436,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                                 },
                                                                                 token: token,
                                                                                 data: {
-                                                                                    notificationId: "medication", // Include a unique identifier in the data payload
+                                                                                    notificationId: "medication",
+                                                                                    val:medName // Include a unique identifier in the data payload
                                                                                 },
                                                                                 apns: {
                                                                                     payload: {
@@ -461,7 +473,8 @@ exports.widgets = functions.pubsub.schedule("every 1 minutes").onRun((context) =
                                                                             },
                                                                             token: token,
                                                                             data: {
-                                                                                notificationId: "medication", // Include a unique identifier in the data payload
+                                                                                notificationId: "medication",
+                                                                                val:medName // Include a unique identifier in the data payload
                                                                             },
                                                                             apns: {
                                                                                 payload: {
